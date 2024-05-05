@@ -1,9 +1,12 @@
 package newws.webclient_service.lib;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.server.reactive.ServerHttpRequest;
+import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.security.web.server.util.matcher.ServerWebExchangeMatcher;
 import org.springframework.stereotype.Component;
+import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.server.ServerWebExchange;
 import org.springframework.web.server.WebFilter;
 import org.springframework.web.server.WebFilterChain;
@@ -11,6 +14,7 @@ import reactor.core.publisher.Mono;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Supplier;
 
 @Slf4j
 @Component
@@ -51,7 +55,9 @@ public class GlobalCustomFilter implements WebFilter {
         } else {
             // 요청이 매치되지 않았을 때의 처리
             log.info("Request ttttt matched!");
-            return Mono.empty();
+//            return Mono.error(new ResponseStatusException(HttpStatus.MULTI_STATUS));
+            ServerHttpResponse response = exchange.getResponse();
+            return ErrorResponse.error(response, ErrorCode.INVALID_TOKEN);
         }
     }
 }
