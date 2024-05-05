@@ -1,0 +1,6 @@
+server:
+  port: 4100
+
+spring:
+  application:
+    name: webclient_service
