@@ -4,3 +4,10 @@ server:
 spring:
   application:
     name: webclient_service
+  jwt:
+    header: Authorization
+    secret: ZXJzdFJlc3RBUElBcHBsaWNhdGlvbg==
+  client:
+    secret: bmV3d3NfcHJvamVjdF9sZWVqYWV5b3VuZw==
+    id: newws_toy_project
+    header: ClientCredentials
